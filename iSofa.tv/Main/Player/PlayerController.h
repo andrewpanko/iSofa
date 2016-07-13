@@ -25,6 +25,9 @@
 #import "WatchView.h"
 #import "SaveView.h"
 
+#import <GoogleSignIn/GoogleSignIn.h>
+
+
 @protocol PlayerControllerDelegate
 @optional
 - (void) playerInitiatedSearch:(NSString *) keyword;
@@ -36,7 +39,7 @@
 
 @interface PlayerController : GAITrackedViewController <PlayMenuDelegate, TimeMenuDelegate, UITextFieldDelegate, ShareMenuDelegate, MFMailComposeViewControllerDelegate,
                                                 ExtrasViewDelegate,UIAlertViewDelegate,GCKDeviceScannerListener,GCKDeviceManagerDelegate,
-                                                GCKMediaControlChannelDelegate,UIActionSheetDelegate>
+                                                GCKMediaControlChannelDelegate,UIActionSheetDelegate, GIDSignInDelegate, GIDSignInUIDelegate>
 {
     PlayMenu                        *playMenu;
     TimeMenu                        *timeMenu;

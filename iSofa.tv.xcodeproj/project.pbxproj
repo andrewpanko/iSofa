@@ -248,6 +248,13 @@
 		8EF947211C038DBB00C65657 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EF947201C038DBB00C65657 /* Menu.xib */; };
 		8EF947441C050BFF00C65657 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF947411C050BFF00C65657 /* GoogleOpenSource.framework */; };
 		8EF947471C050C6900C65657 /* Default-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF947461C050C6900C65657 /* Default-568h.png */; };
+		CEF14DB51D35E82800593D2D /* GoogleSignIn.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF14DB31D35E82800593D2D /* GoogleSignIn.bundle */; };
+		CEF14DB61D35E82800593D2D /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF14DB41D35E82800593D2D /* GoogleSignIn.framework */; };
+		CEF14DB81D35E84C00593D2D /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF14DB71D35E84C00593D2D /* SafariServices.framework */; };
+		CEF14DBD1D36258500593D2D /* GoogleAppUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF14DB91D36258400593D2D /* GoogleAppUtilities.framework */; };
+		CEF14DBE1D36258500593D2D /* GoogleAuthUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF14DBA1D36258400593D2D /* GoogleAuthUtilities.framework */; };
+		CEF14DBF1D36258500593D2D /* GoogleNetworkingUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF14DBB1D36258500593D2D /* GoogleNetworkingUtilities.framework */; };
+		CEF14DC01D36258500593D2D /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF14DBC1D36258500593D2D /* GoogleSymbolUtilities.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -592,6 +599,13 @@
 		8EF947411C050BFF00C65657 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = iSofa.tv/GoogleOpenSource.framework; sourceTree = "<group>"; };
 		8EF947421C050BFF00C65657 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = iSofa.tv/GooglePlus.framework; sourceTree = "<group>"; };
 		8EF947461C050C6900C65657 /* Default-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h.png"; sourceTree = "<group>"; };
+		CEF14DB31D35E82800593D2D /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
+		CEF14DB41D35E82800593D2D /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
+		CEF14DB71D35E84C00593D2D /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		CEF14DB91D36258400593D2D /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppUtilities.framework; sourceTree = "<group>"; };
+		CEF14DBA1D36258400593D2D /* GoogleAuthUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAuthUtilities.framework; sourceTree = "<group>"; };
+		CEF14DBB1D36258500593D2D /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
+		CEF14DBC1D36258500593D2D /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -599,6 +613,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF14DBD1D36258500593D2D /* GoogleAppUtilities.framework in Frameworks */,
+				CEF14DBE1D36258500593D2D /* GoogleAuthUtilities.framework in Frameworks */,
+				CEF14DBF1D36258500593D2D /* GoogleNetworkingUtilities.framework in Frameworks */,
+				CEF14DC01D36258500593D2D /* GoogleSymbolUtilities.framework in Frameworks */,
+				332284591A3A6A5A0023C162 /* SystemConfiguration.framework in Frameworks */,
+				CEF14DB81D35E84C00593D2D /* SafariServices.framework in Frameworks */,
+				3322845D1A3A6BE10023C162 /* AddressBook.framework in Frameworks */,
+				CEF14DB51D35E82800593D2D /* GoogleSignIn.bundle in Frameworks */,
+				CEF14DB61D35E82800593D2D /* GoogleSignIn.framework in Frameworks */,
 				59AFFC6B1C3F907100EA192A /* AdSupport.framework in Frameworks */,
 				59AFFC6A1C3F8FA600EA192A /* EventKit.framework in Frameworks */,
 				59AFFC681C3F8F9000EA192A /* EventKitUI.framework in Frameworks */,
@@ -621,9 +644,7 @@
 				332284611A3A6D4E0023C162 /* MessageUI.framework in Frameworks */,
 				59EA569A1C215CAC00B76806 /* Bolts.framework in Frameworks */,
 				3322845F1A3A6BF20023C162 /* AssetsLibrary.framework in Frameworks */,
-				3322845D1A3A6BE10023C162 /* AddressBook.framework in Frameworks */,
 				3322845B1A3A6BC40023C162 /* AddressBookUI.framework in Frameworks */,
-				332284591A3A6A5A0023C162 /* SystemConfiguration.framework in Frameworks */,
 				332284571A3A69F60023C162 /* CoreMotion.framework in Frameworks */,
 				33AB29761A5B6B8D005E55A1 /* libGoogleAnalyticsServices.a in Frameworks */,
 				332284551A3A69D80023C162 /* CFNetwork.framework in Frameworks */,
@@ -1098,6 +1119,13 @@
 		33CE9AF619F2D00800873E4F = {
 			isa = PBXGroup;
 			children = (
+				CEF14DB91D36258400593D2D /* GoogleAppUtilities.framework */,
+				CEF14DBA1D36258400593D2D /* GoogleAuthUtilities.framework */,
+				CEF14DBB1D36258500593D2D /* GoogleNetworkingUtilities.framework */,
+				CEF14DBC1D36258500593D2D /* GoogleSymbolUtilities.framework */,
+				CEF14DB71D35E84C00593D2D /* SafariServices.framework */,
+				CEF14DB31D35E82800593D2D /* GoogleSignIn.bundle */,
+				CEF14DB41D35E82800593D2D /* GoogleSignIn.framework */,
 				59AFFC691C3F8FA600EA192A /* EventKit.framework */,
 				59AFFC671C3F8F9000EA192A /* EventKitUI.framework */,
 				59AFFC651C3F8F7400EA192A /* CoreTelephony.framework */,
@@ -1805,8 +1833,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bruno Pinaud (EMM6S8VJ59)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bruno Pinaud (EMM6S8VJ59)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bruno  Freire (4JK5RU75QH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bruno  Freire (4JK5RU75QH)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1827,7 +1855,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "dea9102b-4fc2-49b1-951d-412b373b93fe";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
+				PROVISIONING_PROFILE = "e9e37aa8-42e9-4911-b67b-ad9a011fdb90";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1849,8 +1881,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bruno Pinaud (EMM6S8VJ59)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bruno Pinaud (EMM6S8VJ59)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bruno  Freire (4JK5RU75QH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bruno  Freire (4JK5RU75QH)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1863,7 +1895,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "6aed05b2-f6cb-4ac8-9c3b-3211d90b98bb";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
+				PROVISIONING_PROFILE = "e9e37aa8-42e9-4911-b67b-ad9a011fdb90";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1876,13 +1912,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bruno  Freire (4JK5RU75QH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bruno  Freire (4JK5RU75QH)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Volumes/Work/Work/SorinDev/Privat/Other/Elance/Bruno/iSofa,
 					"$(PROJECT_DIR)/iSofa.tv",
 					"$(PROJECT_DIR)",
 				);
@@ -1896,7 +1930,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fimdesemanapictures.youtubevideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "e9e37aa8-42e9-4911-b67b-ad9a011fdb90";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1908,13 +1942,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bruno  Freire (4JK5RU75QH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bruno  Freire (4JK5RU75QH)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Volumes/Work/Work/SorinDev/Privat/Other/Elance/Bruno/iSofa,
 					"$(PROJECT_DIR)/iSofa.tv",
 					"$(PROJECT_DIR)",
 				);
@@ -1928,7 +1960,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fimdesemanapictures.youtubevideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "87142b88-aaa8-49b2-bc2e-e9f43a2213b4";
+				PROVISIONING_PROFILE = "e9e37aa8-42e9-4911-b67b-ad9a011fdb90";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -21,6 +21,8 @@
 #define BANNER_COUNT            50
 #define RATE_COUNT              100
 #define RATE_ID                 @"668579899"
+#define kClientId @"252723577548-g5ftqnem93qomha272qkvcscinohlasl.apps.googleusercontent.com"
+
 
 static NSString * kReceiverAppID = @"A8D112E8";;
 @interface PlayerController ()
@@ -141,6 +143,7 @@ static NSString * kReceiverAppID = @"A8D112E8";;
     
     ratingTimer = NULL;
     bannerTimer = NULL;
+    
 
 }
 
@@ -156,6 +159,8 @@ static NSString * kReceiverAppID = @"A8D112E8";;
 //        bannerTimer = NULL;
 //    }
 }
+
+
 
 - (IBAction)sliderValueChanged:(UISlider *)sender
 {
@@ -1742,24 +1747,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     return YES;
 }
 
-// ----------------------------------------------------------------------------------------------------------------
-// Send Email
-// ----------------------------------------------------------------------------------------------------------------
 
-- (void) sendEmail:(NSString *)body
-{
-    if([MFMailComposeViewController canSendMail])
-    {
-        MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-        picker.mailComposeDelegate = self;
-        [picker setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-        [picker setSubject: @"Have you seen this? Found on iSofa.tv"];
-        [picker setMessageBody: body isHTML:YES];
-        [self presentViewController:picker animated:YES completion:nil];
-        
-        [player pause];
-    }
-}
 
 
 #pragma mark - delegates
@@ -1834,6 +1822,84 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 - (IBAction)onID1:(id)sender {
     [playMenu showInfo:nil];
 }
+
+#pragma mark - ShareMenuDelegate
+
+
+
+// ----------------------------------------------------------------------------------------------------------------
+// Send Email
+// ----------------------------------------------------------------------------------------------------------------
+
+- (void) sendEmail:(NSString *)body
+{
+    if([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+        picker.mailComposeDelegate = self;
+        [picker setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        [picker setSubject: @"Have you seen this? Found on iSofa.tv"];
+        [picker setMessageBody: body isHTML:YES];
+        [self presentViewController:picker animated:YES completion:nil];
+        
+        [player pause];
+    }
+}
+
+// ----------------------------------------------------------------------------------------------------------------
+// Google Signin
+// ----------------------------------------------------------------------------------------------------------------
+
+-(void)onGoogleSignin
+{
+    GIDSignIn* signIn = [GIDSignIn sharedInstance];
+    //    if (self.fetchEmailToggle.isEnabled) {
+    //        signIn.shouldFetchBasicProfile = YES;
+    //    }
+    signIn.clientID = kClientId;
+    signIn.scopes = @[ @"profile", @"email" ];
+    signIn.delegate = self;
+    signIn.uiDelegate = self;
+    
+    [[GIDSignIn sharedInstance] signIn];
+}
+
+#pragma mark - google sigin delegate
+- (void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
+    // Perform any operations on signed in user here.
+    //self.statusField.text = @"Signed in user";
+    
+    [shareView showGooglePlusShare];
+}
+- (void)signIn:(GIDSignIn *)signIn didDisconnectWithUser:(GIDGoogleUser *)user withError:(NSError *)error {
+    // Perform any operations when the user disconnects from app here.
+    //self.statusField.text = @"Disconnected user";
+}
+
+
+#pragma mark - GIDSignInUIDelegate
+- (void)signInWillDispatch:(GIDSignIn *)signIn error:(NSError *)error
+{
+    
+}
+
+// If implemented, this method will be invoked when sign in needs to display a view controller.
+// The view controller should be displayed modally (via UIViewController's |presentViewController|
+// method, and not pushed unto a navigation controller's stack.
+- (void)signIn:(GIDSignIn *)signIn presentViewController:(UIViewController *)viewController
+{
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+// If implemented, this method will be invoked when sign in needs to dismiss a view controller.
+// Typically, this should be implemented by calling |dismissViewController| on the passed
+// view controller.
+- (void)signIn:(GIDSignIn *)signIn dismissViewController:(UIViewController *)viewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 @end
 
 

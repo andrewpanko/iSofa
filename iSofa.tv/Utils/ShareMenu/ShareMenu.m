@@ -8,9 +8,12 @@
 
 #import "ShareMenu.h"
 #import "UIImageView+WebCache.h"
-#import <GooglePlus/GooglePlus.h>
+//#import <GooglePlus/GooglePlus.h>
 #import "FacebookService.h"
 #import "Video.h"
+
+#import <GoogleSignIn/GoogleSignIn.h>
+
 
 @implementation ShareMenu
 
@@ -26,15 +29,40 @@
 
 - (IBAction) onClickGoogle:(UIButton *)sender
 {
-    GPPSignIn *signIn = [GPPSignIn sharedInstance];
-    signIn.shouldFetchGooglePlusUser = YES;
+//    GPPSignIn *signIn = [GPPSignIn sharedInstance];
+//    signIn.shouldFetchGooglePlusUser = YES;
+//    
+//    signIn.clientID = @"273042816169-t0th9esfjvemaukgd60j0nbtd3ip5hmk.apps.googleusercontent.com";
+//    signIn.scopes = @[@"https://www.googleapis.com/auth/plus.login"];
+//    signIn.delegate = self;
+//    [signIn authenticate];
     
-    signIn.clientID = @"273042816169-t0th9esfjvemaukgd60j0nbtd3ip5hmk.apps.googleusercontent.com";
-    signIn.scopes = @[@"https://www.googleapis.com/auth/plus.login"];
-    signIn.delegate = self;
-    [signIn authenticate];
+    [self.delegate onGoogleSignin];
+   
 }
 
+- (void)showGooglePlusShare {
+    
+    NSURL *shareURL = nil;
+    if(currentVideo.isFacebookVideo)
+        shareURL = [NSURL URLWithString:currentVideo.videoID];
+    else
+        shareURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://youtu.be/%@",currentVideo.videoID]];
+    
+    // Construct the Google+ share URL
+    NSURLComponents* urlComponents = [[NSURLComponents alloc]
+                                      initWithString:@"https://plus.google.com/share"];
+    urlComponents.queryItems = @[[[NSURLQueryItem alloc]
+                                  initWithName:@"url"
+                                  value:[shareURL absoluteString]]];
+    NSURL* url = [urlComponents URL];
+    
+    [[UIApplication sharedApplication] openURL:url];
+    
+}
+
+
+/*
 -(void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error
 {
     [GPPShare sharedInstance].delegate = self;
@@ -68,6 +96,7 @@
     
     NSLog(@"Status: %@", text);
 }
+*/
 
 
 // ----------------------------------------------------------------------------------------------------------------

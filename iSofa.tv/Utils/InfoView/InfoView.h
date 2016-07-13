@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <GooglePlus/GooglePlus.h>
+//#import <GooglePlus/GooglePlus.h>
 #import <MessageUI/MessageUI.h>
 #import <Social/Social.h>
 #import <FacebookSDK/FacebookSDK.h>

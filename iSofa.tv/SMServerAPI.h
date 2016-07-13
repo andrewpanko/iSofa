@@ -36,7 +36,8 @@
 //#define CHANNEL_PATH       @"/youtube/channels/#/get"
 
 #define LOGIN_URL          @"http://server.isofa.tv/user_management.php"
-#define CHANNELS_URL       @"http://162.243.18.93/isofatv/get_available_channel_list.php"
+//#define CHANNELS_URL       @"http://162.243.18.93/isofatv/get_available_channel_list.php"
+#define CHANNELS_URL       @"http://server.isofa.tv/get_available_channel_list.php"
 #define FB_URL             @"http://server.isofa.tv/content_facebook.php"
 #define LOCAL_URL          @""
 

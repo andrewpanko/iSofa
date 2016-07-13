@@ -11,8 +11,10 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "RageIAPHelper.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-static NSString * const kClientID = @"273042816169-t0th9esfjvemaukgd60j0nbtd3ip5hmk.apps.googleusercontent.com";
+#import <GoogleSignIn/GoogleSignIn.h>
 
+//static NSString * const kClientID = @"273042816169-t0th9esfjvemaukgd60j0nbtd3ip5hmk.apps.googleusercontent.com";
+static NSString * const kClientID = @"252723577548-g5ftqnem93qomha272qkvcscinohlasl.apps.googleusercontent.com";
 
 //static NSInteger appRunCount = 0;
 
@@ -58,13 +60,18 @@ NSString             *strCurrentChannel = @"";
     
     [[GAI sharedInstance].defaultTracker setAllowIDFACollection:YES];
     
+    /*
     [GPPSignIn sharedInstance].clientID = kClientID;
     // Read Google+ deep-link data.
     [GPPDeepLink setDelegate:self];
     
     [GPPDeepLink readDeepLinkAfterInstall];
+    */
+    
     return YES;
 }
+
+/*
 - (void)didReceiveDeepLink:(GPPDeepLink *)deepLink {
     // An example to handle the deep link data.
     UIAlertView *alert = [[UIAlertView alloc]
@@ -75,6 +82,8 @@ NSString             *strCurrentChannel = @"";
                           otherButtonTitles:nil];
     [alert show];
 }
+ */
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -106,10 +115,9 @@ NSString             *strCurrentChannel = @"";
     if ([scheme hasPrefix:[NSString stringWithFormat:@"fb%@", [[FacebookService sharedService] facebookAppId]]])
         return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];//[FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
     else
-        if([scheme compare:[[NSBundle mainBundle] bundleIdentifier]] ==  NSOrderedSame)
-            return [GPPURLHandler handleURL:url
-                          sourceApplication:sourceApplication
-                                 annotation:annotation];
+        //if([scheme compare:[[NSBundle mainBundle] bundleIdentifier]] ==  NSOrderedSame)
+            return [[GIDSignIn sharedInstance] handleURL:url sourceApplication:sourceApplication annotation:annotation];
+            //return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
     return YES;
     
 }

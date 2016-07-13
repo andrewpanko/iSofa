@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <GooglePlus/GooglePlus.h>
+//#import <GooglePlus/GooglePlus.h>
 #import "GAI.h"
-@interface AppDelegate : UIResponder <UIApplicationDelegate,GPPDeepLinkDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate> //,GPPDeepLinkDelegate>
 @property(nonatomic, strong) id<GAITracker> tracker;
 @property (strong, nonatomic) UIWindow *window;
 

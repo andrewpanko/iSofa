@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Sorin's Macbook Pro. All rights reserved.
 //
 #import <UIKit/UIKit.h>
-#import <GooglePlus/GooglePlus.h>
 #import <MessageUI/MessageUI.h>
 #import <Social/Social.h>
 #import <FacebookSDK/FacebookSDK.h>
@@ -14,17 +13,18 @@
 #import <Foundation/Foundation.h>
 
 
+
 @protocol ShareMenuDelegate
 -(void)sendEmail:(NSString *)body;
 -(void)copyLink;
 -(void)clickSave;
 -(void)clickThumbler;
-
-
+-(void)onGoogleSignin;
 @end
 
+
 @class Video;
-@interface ShareMenu : UIView<GPPShareDelegate,GPPSignInDelegate,MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
+@interface ShareMenu : UIView<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate> //GPPShareDelegate,GPPSignInDelegate
 {
     Video *currentVideo;
 }
@@ -39,6 +39,6 @@
 - (IBAction) onClickEmail:(UIButton *)sender;
 
 - (void) setVideo:(Video *) video;
-
+- (void)showGooglePlusShare;
 
 @end
