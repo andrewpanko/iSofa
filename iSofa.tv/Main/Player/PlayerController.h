@@ -37,6 +37,7 @@
 
 @end
 
+
 @interface PlayerController : GAITrackedViewController <PlayMenuDelegate, TimeMenuDelegate, UITextFieldDelegate, ShareMenuDelegate, MFMailComposeViewControllerDelegate,
                                                 ExtrasViewDelegate,UIAlertViewDelegate,GCKDeviceScannerListener,GCKDeviceManagerDelegate,
                                                 GCKMediaControlChannelDelegate,UIActionSheetDelegate, GIDSignInDelegate, GIDSignInUIDelegate>
@@ -62,6 +63,8 @@
     NSTimer                         *ratingTimer;
     NSTimer                         *bannerTimer;
 }
+
+
 
 
 @property (nonatomic,strong) id   delegate;

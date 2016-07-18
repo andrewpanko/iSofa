@@ -1859,7 +1859,7 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PROVISIONING_PROFILE = "e9e37aa8-42e9-4911-b67b-ad9a011fdb90";
+				PROVISIONING_PROFILE = "37f43511-db35-4186-831e-e7e4962be1a8";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1899,7 +1899,7 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PROVISIONING_PROFILE = "e9e37aa8-42e9-4911-b67b-ad9a011fdb90";
+				PROVISIONING_PROFILE = "37f43511-db35-4186-831e-e7e4962be1a8";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1930,7 +1930,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fimdesemanapictures.youtubevideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e9e37aa8-42e9-4911-b67b-ad9a011fdb90";
+				PROVISIONING_PROFILE = "37f43511-db35-4186-831e-e7e4962be1a8";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1960,7 +1960,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fimdesemanapictures.youtubevideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e9e37aa8-42e9-4911-b67b-ad9a011fdb90";
+				PROVISIONING_PROFILE = "37f43511-db35-4186-831e-e7e4962be1a8";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

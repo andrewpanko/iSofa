@@ -15,6 +15,7 @@
 #import "CustomSlider.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
+
 @import GoogleMobileAds;
 
 
@@ -47,6 +48,9 @@ static NSString * kReceiverAppID = @"A8D112E8";;
     
     CGSize originalVolumeSize;
     int  bVerticalVolumeSlider;
+    
+    UIPanGestureRecognizer *swipeGesture;
+    
 }
 @property GCKMediaControlChannel *mediaControlChannel;
 @property GCKApplicationMetadata *applicationMetadata;
@@ -67,20 +71,20 @@ static NSString * kReceiverAppID = @"A8D112E8";;
 {
     [super viewDidLoad];
     
+    
     adMobbannerView.adUnitID = @"ca-app-pub-5224638778814835/2099102707";
     adMobbannerView.rootViewController = self;
     [adMobbannerView loadRequest:[GADRequest request]];
     
     NSLog(@"playView.frame = %@", NSStringFromCGRect(self.playView.frame));
     
-    [[AVAudioSession sharedInstance]
-     setCategory: AVAudioSessionCategoryPlayback
-     error: nil];
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: nil];
     
     // hide volume hud
     CGRect volumeViewRect = CGRectMake(-50, -50, 0, 0);
     MPVolumeView *sysvolumeView = [[MPVolumeView alloc] initWithFrame: volumeViewRect];
     [self.view addSubview: sysvolumeView];
+    
     
     // Do any additional setup after loading the view.
     if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)])
@@ -147,6 +151,28 @@ static NSString * kReceiverAppID = @"A8D112E8";;
 
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    AVAudioSession* audioSession = [AVAudioSession sharedInstance];
+    [audioSession setActive:YES error:nil];
+    [audioSession addObserver:self
+                   forKeyPath:@"outputVolume"
+                      options:0
+                      context:nil];
+    
+}
+
+-(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    if ([keyPath isEqual:@"outputVolume"]) {
+        float volumeLevel = [[MPMusicPlayerController applicationMusicPlayer] volume] * 10;
+        NSLog(@"volume changed! %f",volumeLevel);
+        [volumeSlider setValue:volumeLevel];
+    }
+}
+
+
 - (void)viewDidUnload
 {
 //    if (ratingTimer) {
@@ -159,7 +185,6 @@ static NSString * kReceiverAppID = @"A8D112E8";;
 //        bannerTimer = NULL;
 //    }
 }
-
 
 
 - (IBAction)sliderValueChanged:(UISlider *)sender
@@ -735,28 +760,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     [player stop];
     
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
 
--(void) addTapHandler
-{
-    // swipe left, right
-    UISwipeGestureRecognizer *prev = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft)];
-    prev.direction                 = UISwipeGestureRecognizerDirectionLeft;
-    prev.cancelsTouchesInView      = NO;
-    [containerView addGestureRecognizer:prev];
-    
-    UISwipeGestureRecognizer *next = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight)];
-    next.direction                 = UISwipeGestureRecognizerDirectionRight;
-    next.cancelsTouchesInView      = NO;
-    [containerView addGestureRecognizer:next];
-    
-    // pinch gesture
-    UIPinchGestureRecognizer *twoFingerPinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerPinch:)];
-    [containerView addGestureRecognizer:twoFingerPinch];
-}
 
 
 // screen capture...
@@ -1198,18 +1202,102 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 }
 
 
+#pragma mark - Swipe
+
+-(void) addTapHandler
+{
+    /*
+    // swipe left, right
+    UISwipeGestureRecognizer *prev = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft)];
+    prev.direction                 = UISwipeGestureRecognizerDirectionLeft;
+    prev.cancelsTouchesInView      = NO;
+    [containerView addGestureRecognizer:prev];
+    
+    UISwipeGestureRecognizer *next = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight)];
+    next.direction                 = UISwipeGestureRecognizerDirectionRight;
+    next.cancelsTouchesInView      = NO;
+    [containerView addGestureRecognizer:next];
+    */
+    
+    // pinch gesture
+    UIPinchGestureRecognizer *twoFingerPinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerPinch:)];
+    [containerView addGestureRecognizer:twoFingerPinch];
+    
+    //swipeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    //[containerView addGestureRecognizer:swipeGesture];
+    
+}
+
+
+#pragma mark -
+
+- (void)handlePanGesture:(UIPanGestureRecognizer *)panGesture //Your action method
+{
+    
+    CGPoint translation, velocity;
+    switch(panGesture.state) {
+        case UIGestureRecognizerStateChanged:
+            translation = [panGesture translationInView:self.view];
+            player.view.center = CGPointMake(self.view.frame.size.width / 2 + translation.x, self.view.frame.size.height / 2);
+            
+            
+            break;
+        case UIGestureRecognizerStateBegan:
+            [panGesture setTranslation:CGPointZero inView:self.view];
+            
+            break;
+        case UIGestureRecognizerStateEnded:
+            velocity = [panGesture velocityInView:self.view];
+            // The user lifted their fingers. Optionally use the velocity to continue rotating the globe automatically
+            if (player.view.center.x > self.view.frame.size.width / 2)
+            {
+                if (velocity.x > 0) {
+                    [containerView removeGestureRecognizer:swipeGesture];
+                    [self swipeRight];
+                } else {
+                    [UIView animateWithDuration:0.3f animations:^{
+                        player.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+                    }];
+                }
+            } else {
+                if (velocity.x > 0) {
+                    [UIView animateWithDuration:0.3f animations:^{
+                        player.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+                    }];
+                } else {
+                    [containerView removeGestureRecognizer:swipeGesture];
+                    [self swipeLeft];
+                }
+            }
+            
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
 // swipe next, prev
 -(void)swipeLeft
 {
+    
     if(!menuView.hidden) return;
-    if(_index == _dataSource.count - 1) return;
+    if(_index == _dataSource.count - 1) {
+        [UIView animateWithDuration:0.3f animations:^{
+            player.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+        } completion:^(BOOL finished) {
+            swipeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+            [containerView addGestureRecognizer:swipeGesture];
+        }];
+        return;
+    }
     //if(player.playbackState != MPMoviePlaybackStatePlaying) return;
     
     // animation player
     [UIView animateWithDuration:0.3f animations:^{
         player.view.center = CGPointMake(-self.view.frame.size.width/2, self.view.frame.size.height/2);
     }];
-
     
     // load next video
     [self nextVideo];
@@ -1218,8 +1306,17 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 -(void)swipeRight
 {
     if(!menuView.hidden) return;
-    if(_index == 0) return;
-    //if(player.playbackState != MPMoviePlaybackStatePlaying) return;
+    if(_index == 0)
+    {
+        [UIView animateWithDuration:0.3f animations:^{
+            player.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+        } completion:^(BOOL finished) {
+            swipeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+            [containerView addGestureRecognizer:swipeGesture];
+        }];
+        return;
+    }
+    if(player.playbackState != MPMoviePlaybackStatePlaying) return;
     
     // animation player
     [UIView animateWithDuration:0.3f animations:^{
@@ -1288,10 +1385,6 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 
 -(void)setThumbnailImage:(NSString *)strIndex
 {
-    
-    
-    
-    
     
     Video *nextVideo = (Video *)[_dataSource objectAtIndex:(int)[strIndex integerValue]];
     NSURL *url = [NSURL URLWithString: nextVideo.ThumbnailLargeURL];
@@ -1677,6 +1770,10 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     self.loadingView.hidden = YES;
     self.thumbnailView.image = nil;
     player.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    
+    
+    swipeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    [containerView addGestureRecognizer:swipeGesture];
 }
 
 
