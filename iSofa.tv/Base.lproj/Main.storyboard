@@ -440,7 +440,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="C3625CCF-E0B1-423F-B5D1-AA22C3A87F63" translatesAutoresizingMaskIntoConstraints="NO" id="4vl-7A-l7j">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="E21868D6-EA17-4CEC-86F9-BD9FEB2980FE" translatesAutoresizingMaskIntoConstraints="NO" id="4vl-7A-l7j">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -2227,7 +2227,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="C3625CCF-E0B1-423F-B5D1-AA22C3A87F63" width="568" height="320">
+        <image name="E21868D6-EA17-4CEC-86F9-BD9FEB2980FE" width="568" height="320">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

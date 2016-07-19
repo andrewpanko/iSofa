@@ -533,6 +533,9 @@ static NSString * kReceiverAppID = @"A8D112E8";;
 
 -(void)backPlayerlist
 {
+    [player stop];
+    player = nil;
+    
     // back to player list
     if ([_delegate respondsToSelector:@selector(playerPressedBack)])
     {
@@ -1070,7 +1073,8 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     
     NSLog(@"ContainerView = %@", NSStringFromCGRect([containerView frame]));
     
-    if (![containerView.subviews containsObject:player.view]) [containerView addSubview:player.view];
+    if (![containerView.subviews containsObject:player.view])
+        [containerView addSubview:player.view];
     [self performSelector:@selector(startDelayedPlayback) withObject:nil afterDelay:0.5f];
     
     
@@ -1288,11 +1292,15 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
             player.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
         } completion:^(BOOL finished) {
             swipeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+            swipeGesture.cancelsTouchesInView      = NO;
             [containerView addGestureRecognizer:swipeGesture];
         }];
         return;
     }
+    
+    if(player.playbackState == MPMoviePlaybackStatePlaying) [player pause];
     //if(player.playbackState != MPMoviePlaybackStatePlaying) return;
+    [self stopTimer];
     
     // animation player
     [UIView animateWithDuration:0.3f animations:^{
@@ -1306,17 +1314,22 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 -(void)swipeRight
 {
     if(!menuView.hidden) return;
+
     if(_index == 0)
     {
         [UIView animateWithDuration:0.3f animations:^{
             player.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
         } completion:^(BOOL finished) {
             swipeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+            swipeGesture.cancelsTouchesInView      = NO;
             [containerView addGestureRecognizer:swipeGesture];
         }];
         return;
     }
-    if(player.playbackState != MPMoviePlaybackStatePlaying) return;
+    
+    
+    if(player.playbackState == MPMoviePlaybackStatePlaying) [player pause];
+    [self stopTimer];
     
     // animation player
     [UIView animateWithDuration:0.3f animations:^{
@@ -1773,6 +1786,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     
     
     swipeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    swipeGesture.cancelsTouchesInView      = NO;
     [containerView addGestureRecognizer:swipeGesture];
 }
 
