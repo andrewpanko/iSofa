@@ -72,7 +72,7 @@ static SMServerAPI *instance;
     
     NSURL *loadurl       = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:loadurl];
-    [request setTimeoutInterval:600];
+    [request setTimeoutInterval:300];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
     [connection start];
@@ -105,6 +105,9 @@ static SMServerAPI *instance;
                 if (code == 200)
                 {
                     [baseDelegate performSelector:baseCallback withObject:[dict objectForKey:@"data"]];
+                }
+                else{
+                    [baseDelegate performSelector:baseCallback withObject:nil];
                 }
             }
             else

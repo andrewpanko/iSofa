@@ -662,6 +662,8 @@
                     NSString *medium_url        =  [videos objectForKey:@"medium"];
                     NSString *hd_url            =  [videos objectForKey:@"hd720"];
                     
+                    
+                    
                     if (medium_url)
                     {
                         newvideo.playURLNormal = [NSURL URLWithString:medium_url];
